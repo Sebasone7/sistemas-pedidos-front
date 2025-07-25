@@ -7,6 +7,8 @@
 <!-- * * * * * * * to get started with your project! * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
+<!-- 
+
 <style>
   :host {
     --bright-blue: oklch(51.01% 0.274 263.83);
@@ -330,6 +332,8 @@
   </div>
 </main>
 
+-->
+
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * The content above * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * * -->
@@ -337,5 +341,62 @@
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * End of Placeholder  * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+
+
+<!-- app.component.html -->
+
+<div class="container">
+  <header class="header">
+    <h1>{{title}}</h1>
+  </header>
+
+  <div class="main-content">
+    <!-- Sección de pedido -->
+    <div class="pedido-section">
+      <div class="input-group">
+        <label for="cantidad">Cantidad de platos:</label>
+        <input type="number" id="cantidad" [(ngModel)]="cantidadPlatos" min="1">
+        <button onclick="realizarPedido()" class="btn-pedir">Realizar Pedido</button>
+      </div>
+
+      <div class="platos-pedidos">
+        <h3>Platos pedidos: {{platosSolicitados}}</h3>
+        <h3>Platos entregados: {{platosEntregados}}</h3>
+      </div>
+    </div>
+
+    <!-- Sección de platillos -->
+    <div class="platillos-section">
+      <h2>Nuestros Platillos</h2>
+      <div class="platillos-container">
+        <div *ngFor="let platillo of platillos" class="platillo-card">
+          <h3>{{platillo.nombre}}</h3>
+          <p class="ingredientes-count">{{platillo.ingredientes.length || 0}} ingredientes</p>
+          <div class="ingredientes-list">
+            <ul>
+              <li *ngFor="let ingrediente of platillo.ingredientes">{{ingrediente}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Historial de pedidos -->
+    <div class="historial-section">
+      <h2>Historial de Pedidos</h2>
+      <div class="historial-container">
+        <div *ngFor="let pedido of pedidos" class="pedido-item">
+          <span>{{pedido.cantidad}} platos</span>
+          <span>{{pedido.fecha | date:'medium'}}</span>
+        </div>
+        <div *ngIf="pedidos.length === 0" class="empty-historial">
+          No hay pedidos registrados
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 
 
